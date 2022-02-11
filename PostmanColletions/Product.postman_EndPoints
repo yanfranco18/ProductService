@@ -1,0 +1,148 @@
+{
+	"info": {
+		"_postman_id": "05d1dcd2-02bd-4bfe-a661-6e767f0ae972",
+		"name": "Product",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8085/products/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8085/products/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"products",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8085/products",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nameProduct\":\"Plazo Fijo\",\r\n    \"numberCard\":\"12345678912\",\r\n    \"typeProduct\":\"Activos\",\r\n    \"accountNumber\":\"191123445906\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8085/products/6201a1836cb8273fb80c149e",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nameProduct\": \"Cuenta Corriente\",\r\n    \"numberCard\": \"5452350089760000\",\r\n    \"typeProduct\": \"Pasivos\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/products/6201a1836cb8273fb80c149e",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"products",
+						"6201a1836cb8273fb80c149e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8085/products/6201a1836cb8273fb80c149e",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/products/6201a1836cb8273fb80c149e",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"products",
+						"6201a1836cb8273fb80c149e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8085/products/search/Activos",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/products/search/Activos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"products",
+						"search",
+						"Activos"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
