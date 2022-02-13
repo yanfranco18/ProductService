@@ -2,14 +2,15 @@ package com.example.product.controllers;
 
 import com.example.product.models.Products;
 import com.example.product.service.IProductsService;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.timelimiter.annotation.TimeLimiter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpServerErrorException;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -22,10 +23,20 @@ import java.util.Date;
 @RequestMapping("/products")
 public class ProductsController {
 
-    @Autowired
-    private CircuitBreakerFactory cbFactory;
-
     private final IProductsService productService;
+
+    //@CircuitBreaker, name(va el nombre de la instancia usado en la configuracion yml, "items")
+    //fallbackMethod, permite manejar el error, mediante un metodo definido
+    //anotacion para el timeout - @TimeLimiter name(va el nombre de la instancia usado en la configuracion yml, "items")
+    //ComplatebleFuture<"tipo">, es envolver una llamada asincrona, represeta futura que ocurre en el tiempo, maneja un generic
+    //supplyAsync, permite envolver la llamada en una futura asincrona del tiempo
+    //metodo buscar por typeProduct
+    @CircuitBreaker(name="products", fallbackMethod = "fallback")
+    @TimeLimiter(name="products")
+    @GetMapping("/search/{typeProduct}")
+    public Flux<Products> searchType(@PathVariable String typeProduct){
+        return productService.findByTypeProduct(typeProduct);
+    }
 
     //Metodo listar, usando response entity para manejar la respuesta del status y la respuesta del body
     @GetMapping
@@ -107,11 +118,8 @@ public class ProductsController {
                 .defaultIfEmpty(ResponseEntity.notFound().build());
     }
 
-    //metodo buscar por typeProduct
-    @GetMapping("/search/{typeProduct}")
-    public Flux<Products> searchType(@PathVariable String typeProduct){
-        return productService.findByTypeProduct(typeProduct);
+    //metodo para manejar el error
+    private String fallback(HttpServerErrorException ex) {
+        return "Response 200, fallback method for error:  " + ex.getMessage();
     }
-
-
 }
