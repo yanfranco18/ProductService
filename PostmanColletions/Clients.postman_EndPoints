@@ -1,0 +1,177 @@
+{
+	"info": {
+		"_postman_id": "fd6588ef-f46b-4d8b-853e-9be8055711b8",
+		"name": "Clients",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8094/clients/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8094/clients/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8094",
+					"path": [
+						"clients",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8094/clients",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nameClient\":\"Industrias Malet\",\r\n    \"typeClient\":\"PYME\",\r\n    \"identityDocument\":\"2334422334\",\r\n    \"phoneNumber\": \"966888777\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8094/clients",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8094",
+					"path": [
+						"clients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8094/clients/620a79684040b66b69555948",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8094/clients/620a79684040b66b69555948",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8094",
+					"path": [
+						"clients",
+						"620a79684040b66b69555948"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8094/clients/620a79684040b66b69555948",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8094/clients/620a79684040b66b69555948",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8094",
+					"path": [
+						"clients",
+						"620a79684040b66b69555948"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8094/clients/search/PYME",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8094/clients/search/PYME",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8094",
+					"path": [
+						"clients",
+						"search",
+						"PYME"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8094/clients/620a79684040b66b69555948",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nameClient\": \"Industrias Marquez\",\r\n    \"typeClient\": \"PYME\",\r\n    \"phoneNumber\": \"944888777\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8094/clients/620a799f4040b66b6955594a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8094",
+					"path": [
+						"clients",
+						"620a799f4040b66b6955594a"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

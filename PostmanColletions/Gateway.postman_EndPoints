@@ -45,6 +45,26 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "http://localhost:8092/clients/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8092/clients/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8092",
+					"path": [
+						"clients",
+						""
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
