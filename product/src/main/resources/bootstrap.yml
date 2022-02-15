@@ -39,6 +39,4 @@ resilience4j:
         configs:
             default:
                 timeout-duration: 2s
-        instances:
-            products:
-                base-config: default
+ 
