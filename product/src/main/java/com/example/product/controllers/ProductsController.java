@@ -71,9 +71,9 @@ public class ProductsController {
         return productService.findById(id)
                 //A traves del flatMap actualizamos los campos para modificar
                 .flatMap(p ->{
-                    p.setNameProduct(products.getNameProduct());
-                    p.setTypeProduct(products.getTypeProduct());
-                    p.setNumberCard(products.getNumberCard());
+                    p.setDescription(products.getDescription());
+                    p.setType(products.getType());
+                    p.setNumber(products.getNumber());
                     return productService.save(p);
                 })
                 //Utilizando el Map cambiamos la respuesta de Mono a un ResponseEntity

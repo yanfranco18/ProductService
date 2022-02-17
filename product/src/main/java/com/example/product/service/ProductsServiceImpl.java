@@ -2,6 +2,7 @@ package com.example.product.service;
 
 import com.example.product.models.Products;
 import com.example.product.repository.ProductsDao;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -9,11 +10,11 @@ import reactor.core.publisher.Mono;
 
 import java.util.Date;
 
+@RequiredArgsConstructor
 @Service
 public class ProductsServiceImpl implements IProductsService{
 
-    @Autowired
-    private ProductsDao productDao;
+    private final ProductsDao productDao;
 
     @Override
     public Flux<Products> findAll() {
