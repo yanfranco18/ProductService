@@ -3,12 +3,10 @@ package com.example.product.service;
 import com.example.product.models.Products;
 import com.example.product.repository.ProductsDao;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.Date;
 
 @RequiredArgsConstructor
 @Service
@@ -17,23 +15,23 @@ public class ProductsServiceImpl implements IProductsService{
     private final ProductsDao productDao;
 
     @Override
-    public Flux<Products> findAll() {
+    public Flux<Products> getProduct() {
         return productDao.findAll();
     }
 
     @Override
-    public Mono<Products> save(Products products) {
+    public Mono<Products> saveProduct(Products products) {
         return productDao.save(products);
     }
 
     @Override
-    public Mono<Void> delete(Products products) {
+    public Mono<Void> deleteProduct(Products products) {
         return productDao.delete(products);
     }
 
     @Override
-    public Mono<Products> findByNameProduct(String nameProduct) {
-        return productDao.findByNameProduct(nameProduct);
+    public Mono<Products> findByDescription(String description) {
+        return productDao.findByDescription(description);
     }
 
     @Override
@@ -42,7 +40,7 @@ public class ProductsServiceImpl implements IProductsService{
     }
 
     @Override
-    public Flux<Products> findByTypeProduct(String typeProduct) {
-        return productDao.findByTypeProduct(typeProduct);
+    public Flux<Products> findByType(String type) {
+        return productDao.findByType(type);
     }
 }

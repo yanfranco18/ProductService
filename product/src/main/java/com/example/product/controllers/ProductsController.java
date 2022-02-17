@@ -33,14 +33,14 @@ public class ProductsController {
     //metodo buscar por typeProduct
     @CircuitBreaker(name="products", fallbackMethod = "fallback")
     @TimeLimiter(name="products")
-    @GetMapping("/search/{typeProduct}")
-    public Flux<Products> searchType(@PathVariable String typeProduct){
-        return productService.findByTypeProduct(typeProduct);
+    @GetMapping("/search/{type}")
+    public Flux<Products> searchType(@PathVariable String type){
+        return productService.findByType(type);
     }
 
     //Metodo listar, usando response entity para manejar la respuesta del status y la respuesta del body
     @GetMapping
-    public Mono<ResponseEntity<Flux<Products>>>  getProduct(){
+    public Mono<ResponseEntity<Flux<Products>>> getProduct(){
         log.info("iniciando lista");
         return Mono.just(
                 //manejo de la respuesta http
@@ -48,16 +48,16 @@ public class ProductsController {
                         //mostrar en el body mediante json
                         .contentType(MediaType.APPLICATION_JSON)
                         //mostrando en el body la respuesta
-                        .body(productService.findAll()));
+                        .body(productService.getProduct()));
     }
 
     //Metodo para eliminar
     @DeleteMapping("/{id}")
-    public Mono<ResponseEntity<Void>> delete(@PathVariable String id){
+    public Mono<ResponseEntity<Void>> deleteProduct (@PathVariable String id){
         //buscamos el id
         return productService.findById(id)
                 //eliminamos el producto encontrado, a traves de un flatMap
-                .flatMap(p -> { return productService.delete(p)
+                .flatMap(p -> { return productService.deleteProduct(p)
                         //Convertir la respuesta Mono<Void> en un entity de tipo Product, usando mono.just
                             .then(Mono.just(new ResponseEntity<Void>(HttpStatus.NO_CONTENT)));
                     //Validamos si el producto existe en la base de datos
@@ -66,7 +66,7 @@ public class ProductsController {
 
     //Metodo para editar, pasamos por el requestBody el producto a modificar
     @PutMapping("/{id}")
-    public Mono<ResponseEntity<Products>> edit(@RequestBody Products products, @PathVariable String id){
+    public Mono<ResponseEntity<Products>> editProduct (@RequestBody Products products, @PathVariable String id){
         //buscamos el id para obtener el product
         return productService.findById(id)
                 //A traves del flatMap actualizamos los campos para modificar
@@ -74,7 +74,7 @@ public class ProductsController {
                     p.setDescription(products.getDescription());
                     p.setType(products.getType());
                     p.setNumber(products.getNumber());
-                    return productService.save(p);
+                    return productService.saveProduct(p);
                 })
                 //Utilizando el Map cambiamos la respuesta de Mono a un ResponseEntity
                 //mediante created pasamos la uri, y con concat concatenemos el id
@@ -89,13 +89,13 @@ public class ProductsController {
 
     //metodo crear
     @PostMapping
-    public Mono<ResponseEntity<Products>> create(@RequestBody Products products){
+    public Mono<ResponseEntity<Products>> saveProduct (@RequestBody Products products){
         //validamos la fecha en caso venga fecha, asigamos la fecha
         if(products.getCreateDate()==null){
             products.setCreateDate(new Date());
         }
         //ahora guardamos el producto, mediante map, cambiamos el flujo de tipo mono a un responseEntity
-        return productService.save(products)
+        return productService.saveProduct(products)
                 //mostramos el estado en el http, indicamos la uri del producto se crea
                 .map(p -> ResponseEntity.created(URI.create("/products/".concat(p.getId())))
                 //Modificamos la respuesta en el body con el contentType
@@ -104,11 +104,11 @@ public class ProductsController {
                         .body(p));
     }
 
-    //metodo buscar por nameProduct
-    @GetMapping("/{nameProduct}")
-    public Mono<ResponseEntity<Products>> search(@PathVariable String nameProduct){
+    //metodo buscar por description
+    @GetMapping("/{description}")
+    public Mono<ResponseEntity<Products>> search(@PathVariable String description){
         //buscamos el tipo de producto
-        return productService.findByNameProduct(nameProduct)
+        return productService.findByDescription(description)
                 //mostramos la respuesta
                 .map(p -> ResponseEntity.ok()
                         //Modificamos la respuesta en el body con el contentType

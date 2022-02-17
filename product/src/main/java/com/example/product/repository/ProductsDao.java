@@ -10,9 +10,9 @@ import reactor.core.publisher.Mono;
 public interface ProductsDao  extends ReactiveMongoRepository<Products, String> {
 
     //Buscar por nombre de producto
-    public Mono<Products> findByNameProduct(String nameProduct);
+    public Mono<Products> findByDescription(String description);
 
     //devuelve por tipo
-    public Flux<Products> findByTypeProduct(String typeProduct);
+    public Flux<Products> findByType(String type);
 
 }
