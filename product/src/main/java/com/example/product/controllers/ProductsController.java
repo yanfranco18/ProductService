@@ -118,4 +118,14 @@ public class ProductsController {
     private String fallback(HttpServerErrorException ex) {
         return "Response 200, fallback method for error:  " + ex.getMessage();
     }
+
+    //metodo buscar por id
+    @GetMapping("/getById/{id}")
+    public Mono<ResponseEntity<Products>> getById(@PathVariable String id){
+        return productService.findById(id)
+                .map(p -> ResponseEntity.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(p))
+                .defaultIfEmpty(ResponseEntity.notFound().build());
+    }
 }
