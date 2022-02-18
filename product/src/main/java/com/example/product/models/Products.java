@@ -20,6 +20,9 @@ public class Products {
     private String description;
     private String number;
     private String type;
+    private Integer maxMovements;
+    private Double commission;
+
 
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date createDate;
