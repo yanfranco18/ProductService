@@ -33,8 +33,8 @@ class ProductApplicationTests {
 	@Test
 	public void getProductsTest() {
 
-		/*Flux<Products> pro = Flux.just(new Products("12233d", "Cuenta Ahorro", "456367568765", "Pasivos",20,0,new Date(2022-02-16)),
-				new Products("12245f", "Tarjeta Credito", "456757567654", "Activos",0,0,new Date(2022-02-16)));
+		Flux<Products> pro = Flux.just(new Products("12233d", "Cuenta Ahorro", "456367568765", "Pasivos",20,0.0,new Date(2022-02-16)),
+				new Products("12245f", "Tarjeta Credito", "456757567654", "Activos",0,0.0,new Date(2022-02-16)));
 		when(service.getProduct()).thenReturn(pro);
 
 		Flux<Products> respBody = webTestClient.get().uri("/products")
@@ -46,9 +46,9 @@ class ProductApplicationTests {
 
 		StepVerifier.create(respBody)
 				.expectSubscription()
-				.expectNext(new Products("12233d", "Cuenta Ahorro", "456367568765", "Pasivos",0,0,new Date(2022-02-16)))
-				.expectNext(new Products("12245f", "Tarjeta Credito", "456757567654", "Activos",0,0,new Date(2022-02-16)))
-				.verifyComplete();*/
+				.expectNext(new Products("12233d", "Cuenta Ahorro", "456367568765", "Pasivos",20,0.0,new Date(2022-02-16)))
+				.expectNext(new Products("12245f", "Tarjeta Credito", "456757567654", "Activos",0,0.0,new Date(2022-02-16)))
+				.verifyComplete();
 	}
 
 	@Test
