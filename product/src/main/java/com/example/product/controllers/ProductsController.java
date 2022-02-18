@@ -54,14 +54,10 @@ public class ProductsController {
     //Metodo para eliminar
     @DeleteMapping("/{id}")
     public Mono<ResponseEntity<Void>> deleteProduct (@PathVariable String id){
-        //buscamos el id
-        return productService.findById(id)
-                //eliminamos el producto encontrado, a traves de un flatMap
-                .flatMap(p -> { return productService.deleteProduct(p)
-                        //Convertir la respuesta Mono<Void> en un entity de tipo Product, usando mono.just
-                            .then(Mono.just(new ResponseEntity<Void>(HttpStatus.NO_CONTENT)));
-                    //Validamos si el producto existe en la base de datos
-                }).defaultIfEmpty(new ResponseEntity<Void>(HttpStatus.NOT_FOUND));
+
+        return productService.deleteProduct(id)
+                .then(Mono.just(new ResponseEntity<Void>(HttpStatus.NO_CONTENT)))
+                .defaultIfEmpty(new ResponseEntity<Void>(HttpStatus.NOT_FOUND));
     }
 
     //Metodo para editar, pasamos por el requestBody el producto a modificar

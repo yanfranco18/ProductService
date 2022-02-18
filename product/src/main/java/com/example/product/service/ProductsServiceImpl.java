@@ -25,8 +25,8 @@ public class ProductsServiceImpl implements IProductsService{
     }
 
     @Override
-    public Mono<Void> deleteProduct(Products products) {
-        return productDao.delete(products);
+    public Mono<Void> deleteProduct(String id) {
+        return productDao.deleteById(id);
     }
 
     @Override

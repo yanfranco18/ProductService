@@ -10,7 +10,7 @@ public interface IProductsService {
 
         public Mono<Products> saveProduct(Products products);
 
-        public Mono<Void> deleteProduct(Products products);
+        public Mono<Void> deleteProduct(String id);
 
         public Mono<Products> findByDescription(String description);
 

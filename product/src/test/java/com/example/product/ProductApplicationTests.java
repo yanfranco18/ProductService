@@ -64,16 +64,12 @@ class ProductApplicationTests {
 	@Test
 	public void deleteProductTest() throws Exception{
 
-		/*Mono<Products> idProduct = service.findById("12233d");
+		when(service.deleteProduct("12233d")).thenReturn(Mono.empty());
 
-		Products product = ;
-
-
-		when(service.deleteProduct(product)).thenReturn(Mono.empty());
-
-		webTestClient.delete().uri("/products/12233d")
+		webTestClient.delete()
+				.uri("/products/12233d")
 				.exchange()
-				.expectStatus().isNoContent();*/
+				.expectStatus().isNoContent();
 
 	}
 
