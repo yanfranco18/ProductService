@@ -39,6 +39,8 @@ public class ProductsController {
     }
 
     //Metodo listar, usando response entity para manejar la respuesta del status y la respuesta del body
+    @CircuitBreaker(name="products", fallbackMethod = "fallback")
+    @TimeLimiter(name="products")
     @GetMapping
     public Mono<ResponseEntity<Flux<Products>>> getProduct(){
         log.info("iniciando lista");
@@ -52,6 +54,8 @@ public class ProductsController {
     }
 
     //Metodo para eliminar
+    @CircuitBreaker(name="products", fallbackMethod = "fallback")
+    @TimeLimiter(name="products")
     @DeleteMapping("/{id}")
     public Mono<ResponseEntity<Void>> deleteProduct (@PathVariable String id){
 
@@ -61,6 +65,8 @@ public class ProductsController {
     }
 
     //Metodo para editar, pasamos por el requestBody el producto a modificar
+    @CircuitBreaker(name="products", fallbackMethod = "fallback")
+    @TimeLimiter(name="products")
     @PutMapping("/{id}")
     public Mono<ResponseEntity<Products>> editProduct (@RequestBody Products products, @PathVariable String id){
         //buscamos el id para obtener el product
@@ -84,6 +90,8 @@ public class ProductsController {
     }
 
     //metodo crear
+    @CircuitBreaker(name="products", fallbackMethod = "fallback")
+    @TimeLimiter(name="products")
     @PostMapping
     public Mono<ResponseEntity<Products>> saveProduct (@RequestBody Products products){
         //validamos la fecha en caso venga fecha, asigamos la fecha
@@ -101,6 +109,8 @@ public class ProductsController {
     }
 
     //metodo buscar por description
+    @CircuitBreaker(name="products", fallbackMethod = "fallback")
+    @TimeLimiter(name="products")
     @GetMapping("/{description}")
     public Mono<ResponseEntity<Products>> search(@PathVariable String description){
         //buscamos el tipo de producto
@@ -114,12 +124,9 @@ public class ProductsController {
                 .defaultIfEmpty(ResponseEntity.notFound().build());
     }
 
-    //metodo para manejar el error
-    private String fallback(HttpServerErrorException ex) {
-        return "Response 200, fallback method for error:  " + ex.getMessage();
-    }
-
     //metodo buscar por id
+    @CircuitBreaker(name="products", fallbackMethod = "fallback")
+    @TimeLimiter(name="products")
     @GetMapping("/getById/{id}")
     public Mono<ResponseEntity<Products>> getById(@PathVariable String id){
         return productService.findById(id)
@@ -128,4 +135,10 @@ public class ProductsController {
                         .body(p))
                 .defaultIfEmpty(ResponseEntity.notFound().build());
     }
+
+    //metodo para manejar el error
+    private String fallback(HttpServerErrorException ex) {
+        return "Response 200, fallback method for error:  " + ex.getMessage();
+    }
+
 }
